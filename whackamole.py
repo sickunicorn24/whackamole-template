@@ -57,7 +57,9 @@ def main():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     x, y = event.pos
 
-                    if (x, y) == (current_x, current_y):
+                    if (current_x * 32 < x < current_x+1 * 32) and (current_y * 32 < y < current_y+1 * 32):
+                        current_x = rand_x * 32
+                        current_y = rand_y * 32
 
                         mole_rect = mole_image.get_rect(topleft = (current_x, current_y))
 
