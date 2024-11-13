@@ -37,7 +37,7 @@ def main():
         width = 640
         height = 512
         line_width = 5
-        line_color = "black
+        line_color = "black"
         
         # You can draw the mole with this snippet:
         # screen.blit(mole_image, mole_image.get_rect(topleft=(x,y)))
