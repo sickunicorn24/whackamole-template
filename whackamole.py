@@ -27,8 +27,10 @@ def main():
     try:
         pygame.init()
         width = 640
+        rows = 16
+        columns = 20
         height = 512
-        line_color = "black"
+        line_color = "light green"
         square_size = 32
 
 
@@ -38,10 +40,16 @@ def main():
         running = True
 
         while running:
-            rand_x = random.randint(1, 21)
-            rand_y = random.randint(1, 17)
-            mole_rect = mole_image.get_rect(topleft = (rand_x, rand_y))
+            current_x = 0
+            current_y = 0
+            screen.fill("black")
+            draw_grid(screen, line_color, square_size, width, height)
+            screen.blit(mole_image, mole_image.get_rect(topleft = (current_x, current_y)))
+            pygame.display.flip()
+            clock.tick(60)
 
+            rand_x = random.randint(0, columns)
+            rand_y = random.randint(0, rows)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -49,15 +57,11 @@ def main():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     x, y = event.pos
 
-                    if event.pos == mole_rect:
-                        screen.blit(mole_image, mole_rect)
+                    if (x, y) == (current_x, current_y):
 
-            screen.fill("light pink")
-            draw_grid(screen, line_color, square_size, width, height)
-            screen.blit(mole_image, mole_image.get_rect(topleft = (0,0)))
-            pygame.display.flip()
-            clock.tick(60)
-         
+                        mole_rect = mole_image.get_rect(topleft = (current_x, current_y))
+
+                        screen.blit(mole_image, mole_rect)
     finally:
         pygame.quit()
 
