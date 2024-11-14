@@ -30,7 +30,7 @@ def main():
         rows = 16
         columns = 20
         height = 512
-        line_color = "light green"
+        line_color = "black"
         square_size = 32
 
         mole_image = pygame.image.load("mole.png")
@@ -42,7 +42,7 @@ def main():
         current_y = 0
 
         #draws the background and grid with the mole in the top left square
-        screen.fill("black")
+        screen.fill("white")
         draw_grid(screen, line_color, square_size, width, height)
         screen.blit(mole_image, mole_image.get_rect(topleft = (current_x, current_y)))
         pygame.display.flip()
@@ -66,7 +66,7 @@ def main():
                         current_x = random.randint(0, columns-1)
                         current_y = random.randint(0, rows-1)
 
-                        screen.fill("black")
+                        screen.fill("white")
                         draw_grid(screen, line_color, square_size, width, height)
 
                         screen.blit(mole_image, mole_image.get_rect(topleft = (current_x * square_size, current_y * square_size)))
