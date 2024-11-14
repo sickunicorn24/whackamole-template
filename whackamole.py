@@ -33,7 +33,6 @@ def main():
         line_color = "light green"
         square_size = 32
 
-
         mole_image = pygame.image.load("mole.png")
         screen = pygame.display.set_mode((width, height))
         clock = pygame.time.Clock()
@@ -42,41 +41,39 @@ def main():
         current_x = 0
         current_y = 0
 
+        #draws the background and grid with the mole in the top left square
         screen.fill("black")
         draw_grid(screen, line_color, square_size, width, height)
         screen.blit(mole_image, mole_image.get_rect(topleft = (current_x, current_y)))
         pygame.display.flip()
         clock.tick(60)
 
-        rand_x = random.randint(0, columns)
-        rand_y = random.randint(0, rows)
-
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
 
+                #checks if the mouse clicks within the mole's square, and if so moves it to a random location
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     x, y = event.pos
 
                     start_x = current_x * square_size
                     end_x = (current_x+1) * square_size
-
                     start_y = current_y * square_size
                     end_y = (current_y+1) * square_size
 
                     if (start_x <= x <= end_x) and (start_y <= y <= end_y):
-                        current_x = rand_x * square_size
-                        current_y = rand_y * square_size
+                        current_x = random.randint(0, columns-1)
+                        current_y = random.randint(0, rows-1)
 
-                    screen.fill("black")
-                    draw_grid(screen, line_color, square_size, width, height)
+                        screen.fill("black")
+                        draw_grid(screen, line_color, square_size, width, height)
 
-                    screen.blit(mole_image, mole_image.get_rect(topleft = (current_x, current_y)))
-                    pygame.display.flip()
+                        screen.blit(mole_image, mole_image.get_rect(topleft = (current_x * square_size, current_y * square_size)))
+                        pygame.display.flip()
 
-                    print(current_x)
-                    print(current_y)
+            clock.tick(60)
+
     finally:
         pygame.quit()
 
